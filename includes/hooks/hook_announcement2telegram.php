@@ -12,7 +12,7 @@ define('TOKEN', 'bot_token_here');
 define('CHANNEL', '@channel_name_here');
 
 
-function sendMessage($text)
+function broadcastAnnouncement($text)
 {
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, 'https://api.telegram.org/bot' . TOKEN . '/sendMessage');
@@ -30,7 +30,7 @@ function sendMessage($text)
 
 add_hook('AnnouncementAdd', 1, function ($vars) 
 {
-	$result = $vars['published'] ? sendMessage($vars['announcement']) : false;
+	$result = $vars['published'] ? broadcastAnnouncement($vars['announcement']) : false;
 	return $result;
 });
 
